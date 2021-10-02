@@ -19,3 +19,5 @@ spec:
           ports:
             - name: katt
               containerPort: 8000
+            - name: katt-debug
+              containerPort: 5555

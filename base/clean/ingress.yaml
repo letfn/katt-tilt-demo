@@ -15,3 +15,21 @@ spec:
           port: 80
       middlewares:
         - name: traefik-forward-auth
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: katt-debug
+spec:
+  tls:
+    certResolver: letsencrypt
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`katt-debug.defn.ooo`)
+      kind: Rule
+      services:
+        - name: katt-debug
+          port: 80
+      middlewares:
+        - name: traefik-forward-auth

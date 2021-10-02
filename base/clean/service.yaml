@@ -13,3 +13,19 @@ spec:
   selector:
     app: katt
   type: ClusterIP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: katt-debug
+  labels:
+    app: katt-debug
+spec:
+  ports:
+    - name: http
+      port: 80
+      protocol: TCP
+      targetPort: katt-debug
+  selector:
+    app: katt
+  type: ClusterIP
