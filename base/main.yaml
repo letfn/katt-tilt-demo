@@ -20,6 +20,23 @@ spec:
     app: katt
   type: ClusterIP
 ---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: katt-debug
+  name: katt-debug
+  namespace: katt
+spec:
+  ports:
+  - name: http
+    port: 80
+    protocol: TCP
+    targetPort: katt-debug
+  selector:
+    app: katt
+  type: ClusterIP
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -42,6 +59,8 @@ spec:
         ports:
         - containerPort: 8000
           name: katt
+        - containerPort: 5555
+          name: katt-debug
 ---
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
@@ -58,6 +77,25 @@ spec:
     - name: traefik-forward-auth
     services:
     - name: katt
+      port: 80
+  tls:
+    certResolver: letsencrypt
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: katt-debug
+  namespace: katt
+spec:
+  entryPoints:
+  - websecure
+  routes:
+  - kind: Rule
+    match: Host(`katt-debug.defn.ooo`)
+    middlewares:
+    - name: traefik-forward-auth
+    services:
+    - name: katt-debug
       port: 80
   tls:
     certResolver: letsencrypt
