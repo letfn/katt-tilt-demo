@@ -29,19 +29,3 @@ spec:
   selector:
     app: katt
   type: ClusterIP
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: katt-home
-  labels:
-    app: katt-home
-spec:
-  ports:
-    - name: sshd
-      port: 22
-      protocol: TCP
-      targetPort: sshd
-  selector:
-    app: katt-home
-  type: ClusterIP
