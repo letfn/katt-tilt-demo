@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: katt
-          image: k3d-hub.defn.ooo:5000/katt-image
+          image: defn/katt-image
           ports:
             - name: katt
               containerPort: 8000

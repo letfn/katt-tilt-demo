@@ -54,7 +54,7 @@ spec:
         app: katt
     spec:
       containers:
-      - image: k3d-hub.defn.ooo:5000/katt-image
+      - image: defn/katt-image
         name: katt
         ports:
         - containerPort: 8000
@@ -92,9 +92,13 @@ spec:
   routes:
   - kind: Rule
     match: Host(`katt-debug.defn.ooo`)
+    middlewares:
+    - name: traefik-forward-auth
     services:
     - name: katt-debug
       port: 80
+  tls:
+    certResolver: letsencrypt
 ---
 apiVersion: traefik.containo.us/v1alpha1
 kind: Middleware

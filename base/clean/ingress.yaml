@@ -21,6 +21,8 @@ kind: IngressRoute
 metadata:
   name: katt-debug
 spec:
+  tls:
+    certResolver: letsencrypt
   entryPoints:
     - web
   routes:
@@ -29,3 +31,5 @@ spec:
       services:
         - name: katt-debug
           port: 80
+      middlewares:
+        - name: traefik-forward-auth
