@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: katt
-          image: generic-image
+          image: nginx
           ports:
             - name: http
               containerPort: 80
