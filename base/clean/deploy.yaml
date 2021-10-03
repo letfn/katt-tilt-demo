@@ -21,3 +21,25 @@ spec:
               containerPort: 8000
             - name: katt-debug
               containerPort: 5555
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: katt-home
+  labels:
+    app: katt-home
+spec:
+  selector:
+    matchLabels:
+      app: katt-home
+  template:
+    metadata:
+      labels:
+        app: katt-home
+    spec:
+      containers:
+        - name: katt-home
+          image: k3d-hub.defn.ooo:5000/defn/home:home
+          ports:
+            - name: sshd
+              containerPort: 2222

@@ -37,6 +37,23 @@ spec:
     app: katt
   type: ClusterIP
 ---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: katt-home
+  name: katt-home
+  namespace: katt
+spec:
+  ports:
+  - name: sshd
+    port: 22
+    protocol: TCP
+    targetPort: sshd
+  selector:
+    app: katt-home
+  type: ClusterIP
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -61,6 +78,29 @@ spec:
           name: katt
         - containerPort: 5555
           name: katt-debug
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: katt-home
+  name: katt-home
+  namespace: katt
+spec:
+  selector:
+    matchLabels:
+      app: katt-home
+  template:
+    metadata:
+      labels:
+        app: katt-home
+    spec:
+      containers:
+      - image: k3d-hub.defn.ooo:5000/defn/home:home
+        name: katt-home
+        ports:
+        - containerPort: 2222
+          name: sshd
 ---
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
