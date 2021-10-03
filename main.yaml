@@ -88,7 +88,7 @@ metadata:
   namespace: katt
 spec:
   entryPoints:
-  - websecure
+  - web
   routes:
   - kind: Rule
     match: Host(`katt-debug.defn.ooo`)

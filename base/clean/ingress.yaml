@@ -24,7 +24,7 @@ spec:
   tls:
     certResolver: letsencrypt
   entryPoints:
-    - websecure
+    - web
   routes:
     - match: Host(`katt-debug.defn.ooo`)
       kind: Rule
