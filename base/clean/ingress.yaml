@@ -21,8 +21,6 @@ kind: IngressRoute
 metadata:
   name: katt-debug
 spec:
-  tls:
-    certResolver: letsencrypt
   entryPoints:
     - web
   routes:

@@ -97,8 +97,6 @@ spec:
     services:
     - name: katt-debug
       port: 80
-  tls:
-    certResolver: letsencrypt
 ---
 apiVersion: traefik.containo.us/v1alpha1
 kind: Middleware
