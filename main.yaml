@@ -92,8 +92,6 @@ spec:
   routes:
   - kind: Rule
     match: Host(`katt-debug.defn.ooo`)
-    middlewares:
-    - name: traefik-forward-auth
     services:
     - name: katt-debug
       port: 80

@@ -29,5 +29,3 @@ spec:
       services:
         - name: katt-debug
           port: 80
-      middlewares:
-        - name: traefik-forward-auth
