@@ -1,6 +1,8 @@
 apiVersion: v1
 kind: Namespace
 metadata:
+  annotations:
+    kuma.io/sidecar-injection: enabled
   name: katt
 ---
 apiVersion: v1
